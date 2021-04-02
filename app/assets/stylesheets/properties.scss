@@ -12,13 +12,15 @@ img {
 display:none;
 }
 
-.list-group-item, .card-body{
+.card {
+.list-group-item,  .card-body{
 padding: 0.75rem;
 }
-
-.card h5 {
+h5 {
   font-size: 1rem
 }
+}
+
 
 .card-header {
 color: #fff
