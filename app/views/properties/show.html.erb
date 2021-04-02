@@ -1,0 +1,27 @@
+<h2>Properties</h2>
+
+<table>
+  <tr>
+    <th></th>
+    <th>MLS ID</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Zip</th>
+    <th>Price</th>
+    <th>Square Feet</th>
+    <th>Lot Size</th>
+  </tr>
+ 
+<% @properties.each do |property| %>
+  <tr>
+    <td><img src="<%= property.img_url %>"/></td>
+    <td><%= property.mls_id %></td>
+    <td><%= property.address %></td>
+    <td><%= property.city %></td>
+    <td><%= property.zip %></td>
+    <td><%= property.price %></td>
+    <td><%= property.square_feet %></td>
+    <td><%= property.lot_size %></td>
+  </tr>
+<% end %>
+</table>
