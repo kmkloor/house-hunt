@@ -4,11 +4,33 @@ class PropertiesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def add
-    
   end
 
   def show
-    @properties = Property.all
+    if(params[:status_id])
+    property = Property.find_by(id: params[:id])
+    property.update!(status_id: params[:status_id])
+    end
+    if(params[:filter])
+      @properties = Property.where(status_id: params[:filter]).includes(:status)
+      @statuses = Status.order(id: :desc)
+      return
+    end
+    @properties = Property.includes(:status).all
+    @statuses = Status.order(id: :desc)
+  end
+
+  def edit
+    @property = Property.find_by(id: params[:id])
+  end
+
+  def update
+    puts params.inspect
+    property = Property.find_by(id: params[:id])
+    property.update!(status_id: params[:status_id])
+    @properties = Property.includes(:status).all
+    @statuses = Status.order(id: :desc)
+    render :show
   end
 
   def getUrl()
@@ -31,6 +53,7 @@ class PropertiesController < ApplicationController
     @property[:square_feet] = url_details['Square Feet'].gsub(/[^\d\.]/, '').to_i
     @property[:lot_size] = url_details['Lot Size (Acres)'].to_f
     @property[:year_built] = url_details['Year Built'].to_i
+    @property[:status_id] = 1
     @property.save!
   end
 

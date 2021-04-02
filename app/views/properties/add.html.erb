@@ -1,6 +1,14 @@
-<h2>Paste Url</h2>
 
+<%= render "nav" =%>
+<div class="container-fluid">
 <form accept-charset="UTF-8" action="/properties/getUrl" method="post" content-type='application/json'>
-  <input name="url" type="text" value="" />
-  <button type="submit">Add</button>
+ <div class="form-group">
+ <label for="exampleInputEmail1">URL</label>
+    <input name="url" type="text" value="" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter url">
+ 
+ </div>
+ <div class="form-group">
+ <button type="submit" class="btn btn-primary mb-2" >Add</button>
+ </div>
 </form>
+</div>
