@@ -12,11 +12,18 @@ class PropertiesController < ApplicationController
     property.update!(status_id: params[:status_id])
     end
     if(params[:filter])
-      @properties = Property.where(status_id: params[:filter]).includes(:status)
+      @properties = Property.where(status_id: params[:filter]).includes(:status, :notes)
       @statuses = Status.order(id: :desc)
       return
     end
-    @properties = Property.includes(:status).all
+    if(params[:note])
+      Note.create(
+        author: params[:author],
+        note: params[:note],
+        property_id: params[:id]
+      ) 
+    end
+    @properties = Property.includes(:status, :notes).all
     @statuses = Status.order(id: :desc)
   end
 
