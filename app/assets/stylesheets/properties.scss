@@ -11,3 +11,11 @@ img {
 .hide{
 display:none;
 }
+
+.list-group-item, .card-body{
+padding: 0.75rem;
+}
+
+.card h5 {
+  font-size: 1rem
+}
