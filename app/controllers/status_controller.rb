@@ -5,7 +5,7 @@ class StatusController < ApplicationController
     
   end
 
-  def seed()
+  def seed
     Status.create_with(status: 'Considering', color: '#EEE8AA')
     Status.create_with(status: 'Ready For Offer', color: '#90EE90')
     Status.create_with(status: 'Offer Sent', color: '#4682B4')
