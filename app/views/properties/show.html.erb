@@ -34,7 +34,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update Property Status</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
@@ -43,7 +43,7 @@
           <form method="post" action="/properties/show" >
             <div class="form-group">
              <input class="hide" name="id" value="<%= property.id %>">
-              <label for="exampleFormControlSelect1">Example select</label>
+              <label for="exampleFormControlSelect1">Status</label>
               <select class="form-control" id="exampleFormControlSelect1" name="status_id">
               <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
                 <option value="<%= status.id %>" <% if property.status.id==status.id %>selected <% end %>><%= status.status %></option>
