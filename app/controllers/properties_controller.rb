@@ -23,7 +23,7 @@ class PropertiesController < ApplicationController
         property_id: params[:id]
       ) 
     end
-    @properties = Property.includes(:status, :notes).all
+    @properties = Property.where.not(status_id: [4]).includes(:status, :notes).all
     @statuses = Status.order(id: :desc)
   end
 
