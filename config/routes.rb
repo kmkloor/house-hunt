@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get 'properties/show', to: 'properties#show'
   get 'properties/show/:filter', to: 'properties#show'
   post 'properties/show', to: 'properties#show'
-  
+  post 'properties/getUrl/', to: 'properties#getUrl'
 end
