@@ -27,8 +27,10 @@ class PropertiesController < ApplicationController
     @statuses = Status.order(id: :desc)
   end
 
-  def edit
+  def addUrl()
     @property = Property.find_by(id: params[:id])
+    @property[:url] = params[:url]
+    @property.save!
   end
 
   def update
@@ -61,6 +63,7 @@ class PropertiesController < ApplicationController
     @property[:lot_size] = url_details['Lot Size (Acres)'].to_f
     @property[:year_built] = url_details['Year Built'].to_i
     @property[:status_id] = 1
+    @property[:url] = params[:url]
     @property.save!
   end
 

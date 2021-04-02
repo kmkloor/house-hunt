@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_212958) do
+ActiveRecord::Schema.define(version: 2021_04_02_222053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_212958) do
     t.float "lot_size"
     t.integer "year_built"
     t.bigint "status_id"
+    t.string "url"
     t.index ["status_id"], name: "index_properties_on_status_id"
   end
 

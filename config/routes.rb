@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'status/add/', to: 'status#add'
   post 'status/update/', to: 'status#update'
   get 'properties/add', to: 'properties#add'
+  post 'properties/addUrl', to: 'properties#addUrl'
   post 'properties/update', to: 'properties#update'
   get 'properties/show', to: 'properties#show'
   get 'properties/show/:filter', to: 'properties#show'
