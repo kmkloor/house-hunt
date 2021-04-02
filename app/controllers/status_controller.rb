@@ -11,4 +11,18 @@ class StatusController < ApplicationController
     Status.create(status: 'Offer Sent', color: '#4682B4')
   end
 
+  def add
+    @status = Status.find_or_initialize_by(status: params[:status])
+    return 'existing record' if !@status.new_record? 
+    @status[:color] = params[:color]
+    @status.save!
+  end
+
+  def update
+    @status = Status.find_by(id: params[:id])
+    @status[:status] = params[:status]
+    @status[:color] = params[:color]
+    @status.save!
+  end
+
 end
