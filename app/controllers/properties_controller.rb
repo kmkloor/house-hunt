@@ -3,9 +3,6 @@ class PropertiesController < ApplicationController
   require 'mechanize'
   skip_before_action :verify_authenticity_token
 
-  def add
-  end
-
   def show
     if(params[:status_id])
     property = Property.find_by(id: params[:id])
@@ -65,6 +62,7 @@ class PropertiesController < ApplicationController
     @property[:status_id] = 1
     @property[:url] = params[:url]
     @property.save!
+    redirect_to action: 'show'
   end
 
 end
