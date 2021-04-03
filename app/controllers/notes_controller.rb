@@ -16,6 +16,13 @@ class NotesController < ApplicationController
     redirect_to '/properties/show'
   end
 
+  def update
+    note = Note.find_by(id: params[:id])
+    note[:author] = params[:author]
+    note[:note] = params[:note]
+    note.save!
+  end
+
   def delete 
     Note.where(id: params[:id]).destroy_all
   end
