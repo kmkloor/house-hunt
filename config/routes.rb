@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get 'notes/all/', to: 'notes#all'
   post 'notes/delete/', to: 'notes#delete'
   post 'notes/add/', to: 'notes#add'
+  post 'notes/update/', to: 'notes#update'
 end
