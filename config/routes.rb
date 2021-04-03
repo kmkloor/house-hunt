@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   get 'properties/show/:filter', to: 'properties#show'
   post 'properties/show', to: 'properties#show'
   post 'properties/getUrl/', to: 'properties#getUrl'
+  get 'notes/all/', to: 'notes#all'
+  post 'notes/delete/', to: 'notes#delete'
+  post 'notes/add/', to: 'notes#add'
 end

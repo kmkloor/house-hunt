@@ -1,2 +1,0 @@
-class NotesControllerController < ApplicationController
-end

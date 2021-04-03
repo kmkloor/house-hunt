@@ -13,13 +13,6 @@ class PropertiesController < ApplicationController
       @statuses = Status.order(id: :desc)
       return
     end
-    if(params[:note])
-      Note.create(
-        author: params[:author],
-        note: params[:note],
-        property_id: params[:id]
-      ) 
-    end
     @properties = Property.where.not(status_id: [4]).includes(:status, :notes).all
     @statuses = Status.order(id: :desc)
   end
