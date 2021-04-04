@@ -1,11 +1,5 @@
 <%= render "nav" =%>
-<nav class="nav mx-auto">
-<a class="nav-link" href="/properties/show/">All</a>
-  <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
-  <a class="nav-link" href="/properties/show/<%= status.id %>"><%= status.status %></a>
-  <% end %>
-</nav>
-<div class="container-fluid mt-2">
+<div class="container-fluid mt-2" id="main">
 <div class="row ">
   <% @properties.sort { |a,b| b.id <=> a.id }.each do |property| %>
   <div class=" col-sm-12 col-md-3 mb-3">
@@ -45,9 +39,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form method="post" action="/properties/show" >
+          <form method="post" action="/properties/update" >
             <div class="form-group">
              <input class="hide" name="id" value="<%= property.id %>">
+             <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
               <label for="exampleFormControlSelect1">Status</label>
               <select class="form-control" id="exampleFormControlSelect1" name="status_id">
                <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
@@ -55,7 +50,7 @@
               <% end %>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary mb-2" >Add Status</button>
+            <button type="submit" class="btn btn-primary mb-2" >Update Status</button>
             <button  class="btn  mb-2" data-dismiss="modal">Close</button>
           </form>
         </div>
@@ -83,6 +78,7 @@
             <div class="modal-body">
            <form method="post" action="/notes/add" id="notes-form" >
             <input class="hide" name="id" value="<%= property.id %>">
+             <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
             <label for="author">Author</label><br>
               <input id="author" name="author" ><br>
               <label for="note">Note</label>

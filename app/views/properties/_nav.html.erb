@@ -1,13 +1,26 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/">Kate & Tim's House Hunt</a>
   <form class="form-inline">
-    <a class="btn btn-outline-primary" href="/properties/add" role="button">
+  <div style="padding-left: 10px;">
+      <a class="btn btn-outline-success" tabindex="-1" onclick="toggleFilters()" role="button">
+      Filters
+      </a>
+    </div>
+     <div style="padding-left: 10px;">
+    <a class="btn btn-outline-success" href="/properties/add" role="button">
     Add
     </a>
+    </div>
     <div style="padding-left: 10px;">
-      <a class="btn btn-outline-success" href="/properties/show" role="button">
+      <a class="btn btn-primary" href="/" role="button">
       See All
       </a>
     </div>
   </form>
+</nav>
+<nav class="nav mx-auto hide" id="filters">
+<a class="nav-link" href="/">All</a>
+  <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
+  <a class="nav-link" href="/<%= status.id %>" style="color: <%= status.color %>"><%= status.status %></a>
+  <% end %>
 </nav>

@@ -5,12 +5,6 @@ class StatusController < ApplicationController
       render json: Status.order(id: :desc)
   end
 
-  def seed
-    Status.create(status: 'Considering', color: '#EEE8AA')
-    Status.create(status: 'Ready For Offer', color: '#90EE90')
-    Status.create(status: 'Offer Sent', color: '#4682B4')
-  end
-
   def add
     @status = Status.find_or_initialize_by(status: params[:status])
     return 'existing record' if !@status.new_record? 

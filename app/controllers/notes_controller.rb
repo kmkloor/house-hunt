@@ -13,7 +13,7 @@ class NotesController < ApplicationController
         property_id: params[:id]
       ) 
     end
-    redirect_to '/properties/show'
+    redirect_to controller: 'properties', action: 'show', filter: params[:filter]
   end
 
   def update

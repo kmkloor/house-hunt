@@ -4,39 +4,24 @@ class PropertiesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def show
-    if(params[:status_id])
-    property = Property.find_by(id: params[:id])
-    property.update!(status_id: params[:status_id])
-    end
     if(params[:filter])
       @properties = Property.where(status_id: params[:filter]).includes(:status, :notes)
       @statuses = Status.order(id: :desc)
       return
     end
-    @properties = Property.where.not(status_id: [4]).includes(:status, :notes).all
+    @properties = Property.where.not(status_id: [4, 5]).includes(:status, :notes).all
     @statuses = Status.order(id: :desc)
-  end
-
-  def addUrl()
-    @property = Property.find_by(id: params[:id])
-    @property[:url] = params[:url]
-    @property.save!
   end
 
   def update
-    puts params.inspect
     property = Property.find_by(id: params[:id])
     property.update!(status_id: params[:status_id])
-    @properties = Property.includes(:status).all
-    @statuses = Status.order(id: :desc)
-    render :show
+    redirect_to action: 'show', filter: params[:filter]
   end
 
-  def getUrl()
-    puts params[:url]   
+  def getUrl
     agent = Mechanize.new
     page = agent.get(params[:url])
-    #agent.page.at("some css selector").text
     url_details = {}
     page.search(".details-block-full-property-details li").each do |li|
       url_details[li.children[0].text.gsub!(': ', '')] = li.children[1].text[1..-1]
@@ -55,7 +40,7 @@ class PropertiesController < ApplicationController
     @property[:status_id] = 1
     @property[:url] = params[:url]
     @property.save!
-    redirect_to action: 'show'
+    redirect_to '/'
   end
 
 end
