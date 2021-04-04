@@ -18,9 +18,3 @@
     </div>
   </form>
 </nav>
-<nav class="nav mx-auto hide" id="filters">
-<a class="nav-link" href="/">All</a>
-  <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
-  <a class="nav-link" href="/<%= status.id %>" style="color: <%= status.color %>"><%= status.status %></a>
-  <% end %>
-</nav>
