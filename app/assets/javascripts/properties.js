@@ -2,13 +2,12 @@ checkFilter()
 
 function toggleFilters() {
   $('#filters').toggleClass('hide')
-  $('#filters').classList
   setCookie('filters', !$('#filters')[0].classList.value.includes("hide"))
 }
 
 function checkFilter(){
   if(getCookie('filters') && getCookie('filters') == 'true'){
-  $('#filters').removeClass('hide');
+    $('#filters').removeClass('hide');
   }
   setTimeout(function(){ checkFilter() }, 300);
 }

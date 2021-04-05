@@ -9,98 +9,105 @@
 <div class="row ">
   <% @properties.sort { |a,b| b.id <=> a.id }.each do |property| %>
   <div class=" col-sm-12 col-md-3 mb-3">
-  <div class="card" style="">
-    <div class="card-header" style="background-color: <%= property.status.color%>">
-      <%= property.status.status%>
-    </div>
-    <img class="card-img-top" src="<%= property.img_url %>" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"><%= property.address %></h5>
-      <h6 class="card-subtitle mb-2 text-muted"><%= property.city %>, <%= property.zip %></h6>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Price: <%= number_to_currency(property.price, :unit => "$") %></li>
-      <li class="list-group-item">Square Feet: <%= property.square_feet %></li>
-      <li class="list-group-item">Lot Size: <%= property.lot_size %></li>
-      <li class="list-group-item">Year Build: <%= property.year_built %></li>
-    </ul>
-    <div class="card-body">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%= property.id %>">
-      Status
-      </button>
-      <button type="button" class="btn" data-toggle="modal" data-target="#notesModal<%= property.id %>">
-      Notes
-      </button>
-    <button onclick="window.location.href = '<%= property.url %>'" type="button" class="btn" type="submit">External</button>
-    </div>
-  </div>
-
-  <div class="modal fade" id="exampleModal<%= property.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Property Status</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="post" action="/properties/update" >
-            <div class="form-group">
-             <input class="hide" name="id" value="<%= property.id %>">
-             <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
-              <label for="exampleFormControlSelect1">Status</label>
-              <select class="form-control" id="exampleFormControlSelect1" name="status_id">
-               <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
-                <option value="<%= status.id %>" <% if property.status.id==status.id %>selected <% end %>><%= status.status %></option>
-              <% end %>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary mb-2" >Update Status</button>
-            <button  class="btn  mb-2" data-dismiss="modal">Close</button>
-          </form>
-        </div>
+    <div class="card" style="">
+      <div class="card-header" style="background-color: <%= property.status.color%>">
+        <%= property.status.status%>
+      </div>
+      <img class="card-img-top" src="<%= property.img_url %>" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%= property.address %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= property.city %>, <%= property.zip %></h6>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price: <%= number_to_currency(property.price, :unit => "$") %></li>
+        <li class="list-group-item">Square Feet: <%= property.square_feet %></li>
+        <li class="list-group-item">Lot Size: <%= property.lot_size %></li>
+        <li class="list-group-item">Year Build: <%= property.year_built %></li>
+      </ul>
+      <div class="card-body">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%= property.id %>">
+        Status
+        </button>
+        <button type="button" class="btn" data-toggle="modal" data-target="#notesModal<%= property.id %>">
+        Notes
+        </button>
+      <button onclick="window.location.href = '<%= property.url %>'" type="button" class="btn" type="submit">External</button>
       </div>
     </div>
-  </div>
 
-<div class="modal fade" id="notesModal<%= property.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-           <ul class="list-group list-group-flush">
-           <% property.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
-                 <li class="list-group-item"><%= note.author %>: <%= note.note %></li>
-              <% end %>
-           
-           </ul>
-           </div>
-            <div class="modal-body">
-           <form method="post" action="/notes/add" id="notes-form" >
-            <input class="hide" name="id" value="<%= property.id %>">
-             <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
-            <label for="author">Author</label><br>
-              <input id="author" name="author" ><br>
-              <label for="note">Note</label>
-              <textarea id="note" name="note" ></textarea>
-              
-           <button type="submit" class="btn btn-primary mb-2" >Add Note</button>
-            <button  class="btn  mb-2" data-dismiss="modal">Close</button>
+    <div class="modal fade" id="exampleModal<%= property.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Property Status</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="/properties/update" >
+              <div class="form-group">
+              <input class="hide" name="id" value="<%= property.id %>">
+              <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
+                <label for="exampleFormControlSelect1">Status</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="status_id">
+                <% @statuses.sort { |a,b| a.id <=> b.id }.each do |status| %>
+                  <option value="<%= status.id %>" <% if property.status.id==status.id %>selected <% end %>><%= status.status %></option>
+                <% end %>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary mb-2" >Update Status</button>
+              <button  class="btn  mb-2" data-dismiss="modal">Close</button>
             </form>
-            </div>
+          </div>
         </div>
       </div>
     </div>
-</div>
 
- 
+    <div class="modal fade" id="notesModal<%= property.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group list-group-flush">
+                <% property.notes.sort { |a,b| a.id <=> b.id }.each do |note| %>
+                      <li class="list-group-item"><%= note.author %>: <%= note.note %></li>
+                    <% end %>
+                
+                </ul>
+                </div>
+                  <div class="modal-body">
+                <form method="post" action="/notes/add" id="notes-form" >
+                  <input class="hide" name="id" value="<%= property.id %>">
+                  <input class="hide" name="filter" value="<%= request.path.gsub("/","") %>">
+                  <label for="author">Author</label><br>
+                    <input id="author" name="author" ><br>
+                    <label for="note">Note</label>
+                    <textarea id="note" name="note" ></textarea>
+                    
+                <button type="submit" class="btn btn-primary mb-2" >Add Note</button>
+                  <button  class="btn  mb-2" data-dismiss="modal">Close</button>
+                  </form>
+                  </div>
+              </div>
+            </div>
+      </div>
+    </div>
+  </div>
   <% end %>
-  
+  <% if @properties.length == 0 %>
+   <div class=" col-12 ">
+  <div class="card">
+    <div class="card-body">
+      No properties match.
+    </div>
+  </div>
+  </div>
+  <% end %>
   </div>
 </div>
